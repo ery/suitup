@@ -1,4 +1,8 @@
 
+function suitup-path {
+  echo $_suitup_path
+}
+
 function suitup-reload-bashrc {
   source ~/.bashrc
 }

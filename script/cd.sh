@@ -7,3 +7,7 @@ function suitup-cd-realpath {
 function suitup-realpath {
   realpath .
 }
+
+function suitup-cd-suitup {
+  cd $_suitup_path
+}
