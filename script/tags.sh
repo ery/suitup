@@ -1,10 +1,5 @@
 
-function suitup-cd-gemset {
-  gem_name=`rvm current`
-  cd ~/.rvm/gems/$gem_name/gems
-}
-
-function suitup-tags-ruby {
+function suitup-tags {
   project_path=`pwd`
   gem_path=~/.rvm/gems/`rvm current`/gems
 
@@ -19,15 +14,34 @@ function suitup-tags-ruby {
   ln -s $project_path/tags $project_path/.tags
   ln -s $gem_path/tags $gem_path/.tags
 
+  suitup-tags-status
+}
+
+function suitup-tags-status {
+  project_path=`pwd`
+  gem_path=~/.rvm/gems/`rvm current`/gems
+
   echo "Project Tags"
   echo "................................"
-  du -lh $project_path/tags
   du -lh $project_path/.tags
+  du -lh $project_path/tags
   echo ""
 
   echo "Gem Tags"
   echo "................................"
-  du -lh $gem_path/tags
   du -lh $gem_path/.tags
+  du -lh $gem_path/tags
   echo ""
+}
+
+function suitup-tags-clean {
+  project_path=`pwd`
+  gem_path=~/.rvm/gems/`rvm current`/gems
+
+  rm -f $project_path/.tags
+  rm -f $project_path/tags
+  rm -f $gem_path/.tags
+  rm -f $gem_path/tags
+
+  echo "Clean Tags."
 }
