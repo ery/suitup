@@ -23,6 +23,13 @@ function suitup-mysql-drop-database {
   mysql -u$user -p$password -e"DROP DATABASE IF EXISTS $database"
 }
 
+function suitup-mysql-create-database {
+  database=$1
+  user='root'
+  password='root'
+  mysql -u$user -p$password -e"CREATE DATABASE IF NOT EXISTS $database DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci"
+}
+
 function suitup-mysql-desc-table {
   database=$1
   table=$2
