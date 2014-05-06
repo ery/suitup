@@ -30,6 +30,22 @@ function suitup-mysql-create-database {
   mysql -u$user -p$password -e"CREATE DATABASE IF NOT EXISTS $database DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci"
 }
 
+function suitup-mysql-command {
+  database=$1
+  command=$2
+  user='root'
+  password='root'
+  mysql -u$user -p$password $database -e"$command"
+}
+
+function suitup-mysql-script {
+  database=$1
+  script=$2
+  user='root'
+  password='root'
+  mysql -u$user -p$password $database < $script
+}
+
 function suitup-mysql-desc-table {
   database=$1
   table=$2
