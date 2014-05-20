@@ -54,6 +54,15 @@ function suitup-mysql-desc-table {
   mysql -u$user -p$password -e"USE $database; DESC $table"
 }
 
+function suitup-mysql-show-index {
+  database=$1
+  table=$2
+  user='root'
+  password='root'
+  mysql -u$user -p$password -e"USE $database; SHOW INDEX FROM $table"
+}
+
+
 # suitup-mysql-backup server    database user password local_folder
 # suitup-mysql-backup jason.com blog     red  redps    ~/backup/jason_blog
 function suitup-mysql-backup {
