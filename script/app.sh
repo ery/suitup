@@ -3,6 +3,11 @@ function suitup-path {
   echo $_suitup_path
 }
 
+# suitup-show suitup-path
+function suitup-show {
+  type -f $1
+}
+
 function suitup-reload-bashrc {
   source ~/.bashrc
 }
