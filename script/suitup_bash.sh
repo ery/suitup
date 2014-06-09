@@ -4,17 +4,5 @@ function suitup-current-dir {
 
 _suitup_path="$( suitup-current-dir )/.."
 
-source "$_suitup_path/script/app.sh"
-source "$_suitup_path/script/open.sh"
-source "$_suitup_path/script/cd.sh"
-source "$_suitup_path/script/edit.sh"
-source "$_suitup_path/script/git.sh"
-source "$_suitup_path/script/tags.sh"
-source "$_suitup_path/script/rails.sh"
-source "$_suitup_path/script/rails-db.sh"
-source "$_suitup_path/script/rails-test.sh"
-source "$_suitup_path/script/ssh.sh"
-source "$_suitup_path/script/ps.sh"
-source "$_suitup_path/script/solr.sh"
-source "$_suitup_path/script/alias.sh"
-source "$_suitup_path/script/mysql.sh"
+source "$_suitup_path/script/suitup.sh"
+suitup-load-script $_suitup_path
