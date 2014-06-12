@@ -16,3 +16,7 @@ function suitup-rails-db-reset-production {
   rake db:create  RAILS_ENV=production
   rake db:migrate RAILS_ENV=production
 }
+
+function suitup-rails-db-mysql-schema-version {
+  suitup-mysql-command $1 "SELECT * FROM schema_migrations ORDER BY version DESC LIMIT 20"
+}
