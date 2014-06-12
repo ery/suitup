@@ -20,6 +20,13 @@ function suitup-mysql-select-table {
   database=$1
   table=$2
   columns=$3
+
+  if [ -n "$columns" ]; then
+    columns=$columns
+  else
+    columns="*"
+  fi
+
   user='root'
   password='root'
   mysql -u$user -p$password -e"USE $database; SELECT $columns FROM $table LIMIT 200"
