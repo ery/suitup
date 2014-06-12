@@ -16,6 +16,15 @@ function suitup-mysql-show-tables {
   mysql -u$user -p$password -e"USE $database; SHOW TABLES"
 }
 
+function suitup-mysql-select-table {
+  database=$1
+  table=$2
+  columns=$3
+  user='root'
+  password='root'
+  mysql -u$user -p$password -e"USE $database; SELECT $columns FROM $table LIMIT 200"
+}
+
 function suitup-mysql-drop-database {
   database=$1
   user='root'
