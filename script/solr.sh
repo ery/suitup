@@ -1,24 +1,24 @@
 
-function suitup-solr-ps {
-  suitup-find-ps solr
+function suitup-solr-status {
+  suitup-run 'suitup-find-ps solr'
 }
 
 function suitup-solr-kill {
-  suitup-kill-ps solr
+  suitup-run 'suitup-kill solr'
 }
 
 function suitup-solr-run {
-  rake sunspot:solr:run
+  suitup-run 'rake sunspot:solr:run'
 }
 
 function suitup-solr-start {
-  rake sunspot:solr:start
+  suitup-run 'rake sunspot:solr:start'
 }
 
 function suitup-solr-stop {
-  rake sunspot:solr:stop
+  suitup-run 'rake sunspot:solr:stop'
 }
 
 function suitup-solr-reindex {
-  rake sunspot:reindex
+  suitup-run 'rake sunspot:reindex'
 }
