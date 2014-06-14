@@ -4,6 +4,7 @@ function suitup-load-script {
   _suitup_path=$1
   source "$_suitup_path/script/app.sh"
   source "$_suitup_path/script/open.sh"
+  source "$_suitup_path/script/xdg-open.sh"
   source "$_suitup_path/script/cd.sh"
   source "$_suitup_path/script/edit.sh"
   source "$_suitup_path/script/git.sh"
