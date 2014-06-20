@@ -1,7 +1,7 @@
 
 function suitup-tags {
-  project_path=`pwd`
-  gem_path=~/.rvm/gems/`rvm current`/gems
+  local project_path=`pwd`
+  local gem_path=~/.rvm/gems/`rvm current`/gems
 
   rm -f $project_path/tags
   rm -f $project_path/.tags
@@ -18,8 +18,8 @@ function suitup-tags {
 }
 
 function suitup-tags-status {
-  project_path=`pwd`
-  gem_path=~/.rvm/gems/`rvm current`/gems
+  local project_path=`pwd`
+  local gem_path=~/.rvm/gems/`rvm current`/gems
 
   echo "Project Tags"
   echo "................................"
@@ -35,8 +35,8 @@ function suitup-tags-status {
 }
 
 function suitup-tags-clean {
-  project_path=`pwd`
-  gem_path=~/.rvm/gems/`rvm current`/gems
+  local project_path=`pwd`
+  local gem_path=~/.rvm/gems/`rvm current`/gems
 
   rm -f $project_path/.tags
   rm -f $project_path/tags
