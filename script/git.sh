@@ -16,6 +16,16 @@ function suitup-git-current-branch {
   git branch 2>/dev/null | grep '^*' | colrm 1 2
 }
 
+function suitup-git-current-remote-branch {
+  local current_branch=$(suitup-git-current-branch)
+  git config branch.${current_branch}.merge | colrm 1 11
+}
+
+function suitup-git-reset-remote-branch {
+  local remote_branch=$(suitup-git-current-remote-branch)
+  git reset origin/$remote_branch
+}
+
 # suitup-git-reset-commit-push 'update'
 # suitup-git-reset-commit-push 'update' 'Jack <jack@gmail.com>'
 function suitup-git-reset-commit-push {
