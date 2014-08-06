@@ -60,3 +60,14 @@ function suitup-bash-ps1-color {
 
   PS1="$C_User\u$C_Mark@$C_Host\h$C_Mark:$C_Folder\W$C_Mark:$C_Branch\$(suitup-git-current-branch)$C_Mark\$ $WHITE"
 }
+
+function suitup-hostname-setup {
+  local host_name=$1
+  sudo bash -c "echo '127.0.0.1 $host_name' >> /etc/hosts"
+  sudo bash -c "echo '$host_name' > /etc/hostname"
+  sudo hostname $host_name
+}
+
+function suitup-hostname {
+  hostname
+}
