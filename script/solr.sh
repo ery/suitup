@@ -4,11 +4,11 @@ function suitup-solr-status {
 }
 
 function suitup-solr-run {
-  suitup-run 'rake sunspot:solr:run'
+  suitup-run 'rake sunspot:solr:start'
 }
 
-function suitup-solr-run-deamon {
-  suitup-run 'rake sunspot:solr:start'
+function suitup-solr-run-test {
+  suitup-run 'rake sunspot:solr:start RAILS_ENV=test'
 }
 
 function suitup-solr-stop {
