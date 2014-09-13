@@ -1,4 +1,7 @@
 
+function suitup-git-status {
+  git status
+}
 
 function suitup-git-push-origin {
   git push origin HEAD
