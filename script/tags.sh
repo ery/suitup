@@ -23,14 +23,14 @@ function suitup-tags-status {
 
   echo "Project Tags"
   echo "................................"
-  du -lh $project_path/.tags
-  du -lh $project_path/tags
+  du -h $project_path/.tags
+  du -h $project_path/tags
   echo ""
 
   echo "Gem Tags"
   echo "................................"
-  du -lh $gem_path/.tags
-  du -lh $gem_path/tags
+  du -h $gem_path/.tags
+  du -h $gem_path/tags
   echo ""
 }
 
