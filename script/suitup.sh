@@ -16,7 +16,7 @@ function suitup-load-script {
   source "$_suitup_path/script/ps.sh"
   source "$_suitup_path/script/solr.sh"
   source "$_suitup_path/script/mysql.sh"
-  source "$_suitup_path/script/alias.sh"
   source "$_suitup_path/script/redis.sh"
   source "$_suitup_path/script/kill.sh"
+  source "$_suitup_path/script/alias.sh"
 }
