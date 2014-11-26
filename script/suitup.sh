@@ -1,7 +1,7 @@
 
 # suitup-load-script path
 function suitup-load-script {
-  _suitup_path=$1
+  local _suitup_path=$1
   source "$_suitup_path/script/app.sh"
   source "$_suitup_path/script/open.sh"
   source "$_suitup_path/script/xdg-open.sh"
@@ -12,6 +12,7 @@ function suitup-load-script {
   source "$_suitup_path/script/rails.sh"
   source "$_suitup_path/script/rails-db.sh"
   source "$_suitup_path/script/rails-test.sh"
+  source "$_suitup_path/script/rails-batch-test.sh"
   source "$_suitup_path/script/ssh.sh"
   source "$_suitup_path/script/ps.sh"
   source "$_suitup_path/script/solr.sh"
