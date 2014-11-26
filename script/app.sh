@@ -71,3 +71,8 @@ function suitup-hostname-setup {
 function suitup-hostname {
   hostname
 }
+
+function suitup-upgrede {
+  suitup-cd-suitup
+  git pull
+}
