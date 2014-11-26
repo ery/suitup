@@ -13,29 +13,28 @@ function suitup-git-push-force {
 # suitup-git-commit 'update'
 # suitup-git-commit 'update' 'Jack <jack@gmail.com>'
 function suitup-git-commit {
-  if [ -n "$1" ]; then
-    MESSAGE="$1"
-  else
-    MESSAGE="No message."
-  fi
+  local message=$1
+  local author=$2
 
-  if [ -n "$2" ]; then
-    AUTHOR="$2"
+  if [ -n "$message" ]; then
+    message="$message"
+  else
+    message="No message."
   fi
 
   git add .
 
-  if [ -n "$2" ]; then
-    git commit -am "$MESSAGE" --author="$AUTHOR"
+  if [ -n "$author" ]; then
+    git commit -am $message --author=$author
   else
-    git commit -am "$MESSAGE"
+    git commit -am $message
   fi
 }
 
 # suitup-git-commit-push 'update'
 # suitup-git-commit-push 'update' 'Jack <jack@gmail.com>'
 function suitup-git-commit-push {
-  suitup-git-commit "$1" "$2"
+  suitup-git-commit $1 $2
   suitup-git-push
 }
 
@@ -48,14 +47,14 @@ function suitup-git-recovery {
 # suitup-git-recovery-commit 'update' 'Jack <jack@gmail.com>'
 function suitup-git-recovery-commit {
   suitup-git-recovery
-  suitup-git-commit "$1" "$2"
+  suitup-git-commit $1 $2
 }
 
 # suitup-git-recovery-commit-push 'update'
 # suitup-git-recovery-commit-push 'update' 'Jack <jack@gmail.com>'
 function suitup-git-recovery-commit-push {
   suitup-git-recovery
-  suitup-git-commit "$1" "$2"
+  suitup-git-commit $1 $2
   suitup-git-push
 }
 
