@@ -1,54 +1,13 @@
 
-function suitup-git-status {
-  git status
-}
+# Comit Push
+##############################################
 
-function suitup-git-push-origin {
+function suitup-git-push {
   git push origin HEAD
 }
 
-function suitup-git-push-origin-force {
-  git push origin HEAD -f
-}
-
-function suitup-git-log {
-  git log --graph --pretty=format:'%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset -%C(yellow)%d%Creset' --abbrev-commit --
-}
-
-function suitup-git-current-branch {
-  git branch 2>/dev/null | grep '^*' | colrm 1 2
-}
-
-function suitup-git-current-remote-branch {
-  local current_branch=$(suitup-git-current-branch)
-  git config branch.${current_branch}.merge | colrm 1 11
-}
-
-function suitup-git-reset-remote-branch {
-  local remote_branch=$(suitup-git-current-remote-branch)
-  git reset origin/$remote_branch
-}
-
-# suitup-git-reset-commit-push 'update'
-# suitup-git-reset-commit-push 'update' 'Jack <jack@gmail.com>'
-function suitup-git-reset-commit-push {
-  git reset origin/master
-  suitup-git-commit "$1" "$2"
-  git push origin HEAD
-}
-
-# suitup-git-reset-commit 'update'
-# suitup-git-reset-commit 'update' 'Jack <jack@gmail.com>'
-function suitup-git-reset-commit {
-  git reset origin/master
-  suitup-git-commit "$1" "$2"
-}
-
-# suitup-git-commit-push 'update'
-# suitup-git-commit-push 'update' 'Jack <jack@gmail.com>'
-function suitup-git-commit-push {
-  suitup-git-commit "$1" "$2"
-  git push origin HEAD
+function suitup-git-push-force {
+  git push origin HEAD --force
 }
 
 # suitup-git-commit 'update'
@@ -73,52 +32,47 @@ function suitup-git-commit {
   fi
 }
 
-# suitup-git-create-issue-branch 666_new_customer
-function suitup-git-create-issue-branch {
-  ISSUE_NAME=$1
-
-  if [ -n "$ISSUE_NAME" ]; then
-    echo "Creating new branch for issue $ISSUE_NAME"
-    echo '............................................'
-  else
-    echo 'Have to input issue name'
-    return
-  fi
-
-  git checkout master
-  git pull origin master
-  git push origin master:"$ISSUE_NAME"
-  git branch --track "$ISSUE_NAME" origin/"$ISSUE_NAME"
-  git checkout "$ISSUE_NAME"
+# suitup-git-commit-push 'update'
+# suitup-git-commit-push 'update' 'Jack <jack@gmail.com>'
+function suitup-git-commit-push {
+  suitup-git-commit "$1" "$2"
+  suitup-git-push
 }
 
-# suitup-git-checkout-issue-branch 922_form_toolbar_mirror
-function suitup-git-checkout-issue-branch {
-  ISSUE_NAME=$1
-
-  if [ -n "$ISSUE_NAME" ]; then
-    echo "Checkout issue branch for $ISSUE_NAME"
-    echo '............................................'
-  else
-    echo 'Have to input issue name'
-    return
-  fi
-
-  git checkout -b $ISSUE_NAME origin/$ISSUE_NAME
+function suitup-git-recovery {
+  local remote_branch=$(suitup-git-current-remote-branch)
+  git reset origin/$remote_branch
 }
 
-
-function suitup-git-diff-master {
-  suitup-git-diff master
+# suitup-git-recovery-commit 'update'
+# suitup-git-recovery-commit 'update' 'Jack <jack@gmail.com>'
+function suitup-git-recovery-commit {
+  suitup-git-recovery
+  suitup-git-commit "$1" "$2"
 }
 
-function suitup-git-diff-develop {
-  suitup-git-diff develop
+# suitup-git-recovery-commit-push 'update'
+# suitup-git-recovery-commit-push 'update' 'Jack <jack@gmail.com>'
+function suitup-git-recovery-commit-push {
+  suitup-git-recovery
+  suitup-git-commit "$1" "$2"
+  suitup-git-push
+}
+
+# View
+##############################################
+
+function suitup-git-status {
+  git status
+}
+
+function suitup-git-log {
+  git log --graph --pretty=format:'%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset -%C(yellow)%d%Creset' --abbrev-commit
 }
 
 # If you want to konw?
 # What is differents between last and target commits?
-# And target commit id is cdf987c1bdf2dfc1e910216804e78ac7ac3700f2.
+# If target commit id is cdf987c1bdf2dfc1e910216804e78ac7ac3700f2.
 # Then input:
 # suitup-git-diff cdf987c1bdf2dfc1e910216804e78ac7ac3700f2
 function suitup-git-diff {
@@ -156,21 +110,12 @@ function suitup-git-diff {
   suitup-edit-some /tmp/suitup-git-diff.COMMIT_EDITMSG
 }
 
-function suitup-git-release-branch {
-  RELEASE_TIME=$(date "+%Y%m%d_%H%M");
-  BRANCH_NAME="release_$RELEASE_TIME";
-  echo "-----------------------------------------";
-  echo "Create Branch $BRANCH_NAME , base on current branch.";
-  git branch "$BRANCH_NAME";
-  echo "";
-  echo "-----------------------------------------";
-  echo "Push Branch $BRANCH_NAME to Origin.";
-  git push origin "$BRANCH_NAME":"$BRANCH_NAME";
-  echo "";
-  echo "Checkout Branch $BRANCH_NAME .";
-  echo "-----------------------------------------";
-  git checkout "$BRANCH_NAME";
-  echo ""
+function suitup-git-diff-master {
+  suitup-git-diff master
+}
+
+function suitup-git-diff-develop {
+  suitup-git-diff develop
 }
 
 function suitup-git-show {
@@ -188,4 +133,70 @@ function suitup-git-show {
   git show $TARGET >> $RESULT_FILE
 
   suitup-edit-some $RESULT_FILE
+}
+
+# Other
+##############################################
+
+function suitup-git-current-branch {
+  git branch 2>/dev/null | grep '^*' | colrm 1 2
+}
+
+function suitup-git-current-remote-branch {
+  local current_branch=$(suitup-git-current-branch)
+  git config branch.${current_branch}.merge | colrm 1 11
+}
+
+# Work Flow
+##############################################
+
+# suitup-git-create-issue-branch 666_new_customer
+function suitup-git-create-issue-branch {
+  ISSUE_NAME=$1
+
+  if [ -n "$ISSUE_NAME" ]; then
+    echo "Creating new branch for issue $ISSUE_NAME"
+    echo '............................................'
+  else
+    echo 'Have to input issue name'
+    return
+  fi
+
+  git checkout master
+  git pull origin master
+  git push origin master:"$ISSUE_NAME"
+  git branch --track "$ISSUE_NAME" origin/"$ISSUE_NAME"
+  git checkout "$ISSUE_NAME"
+}
+
+# suitup-git-checkout-issue-branch 922_form_toolbar_mirror
+function suitup-git-checkout-issue-branch {
+  ISSUE_NAME=$1
+
+  if [ -n "$ISSUE_NAME" ]; then
+    echo "Checkout issue branch for $ISSUE_NAME"
+    echo '............................................'
+  else
+    echo 'Have to input issue name'
+    return
+  fi
+
+  git checkout -b $ISSUE_NAME origin/$ISSUE_NAME
+}
+
+function suitup-git-release-branch {
+  RELEASE_TIME=$(date "+%Y%m%d_%H%M");
+  BRANCH_NAME="release_$RELEASE_TIME";
+  echo "-----------------------------------------";
+  echo "Create Branch $BRANCH_NAME , base on current branch.";
+  git branch "$BRANCH_NAME";
+  echo "";
+  echo "-----------------------------------------";
+  echo "Push Branch $BRANCH_NAME to Origin.";
+  git push origin "$BRANCH_NAME":"$BRANCH_NAME";
+  echo "";
+  echo "Checkout Branch $BRANCH_NAME .";
+  echo "-----------------------------------------";
+  git checkout "$BRANCH_NAME";
+  echo ""
 }
