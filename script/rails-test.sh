@@ -65,38 +65,3 @@ alias suitup-rtm-prepare='suitup-rails-test-multi-prepare'
 alias suitup-rtm-add='suitup-rails-test-multi-add'
 alias suitup-rtm-status='suitup-rails-test-multi-status'
 alias suitup-rtm-run='suitup-rails-test-multi-run'
-
-# suitup-rails-test-spork
-# suitup-rts
-##################################################################################
-
-function suitup-rails-test-spork-some {
-  time testdrb -I test/ "$1"
-}
-
-function suitup-rails-test-spork-unit {
-  time testdrb -I test/ test/unit
-}
-
-function suitup-rails-test-spork-functional {
-  time testdrb -I test/ test/functional
-}
-
-function suitup-rails-test-spork-integration {
-  time testdrb -I test/ test/integration
-}
-
-function suitup-rails-test-spork-all {
-  function test-all {
-    testdrb -I test/ test/unit/
-    testdrb -I test/ test/functional/
-    testdrb -I test/ test/integration/
-  }
-  time test-all
-}
-
-alias suitup-rts-some='suitup-rails-test-spork'
-alias suitup-rts-unit='suitup-rails-test-spork-unit'
-alias suitup-rts-functional='suitup-rails-test-spork-functional'
-alias suitup-rts-integration='suitup-rails-test-spork-integration'
-alias suitup-rts-all='suitup-rails-test-spork-all'

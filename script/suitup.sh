@@ -18,5 +18,6 @@ function suitup-load-script {
   source "$_suitup_path/script/mysql.sh"
   source "$_suitup_path/script/redis.sh"
   source "$_suitup_path/script/kill.sh"
+  source "$_suitup_path/script/zeus.sh"
   source "$_suitup_path/script/alias.sh"
 }
