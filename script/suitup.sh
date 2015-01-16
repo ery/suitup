@@ -22,3 +22,10 @@ function suitup-load-script {
   source "$_suitup_path/script/zeus.sh"
   source "$_suitup_path/script/alias.sh"
 }
+
+# suitup_load /home/tom/Documents/github/
+function suitup-load {
+  local _suitup_path="$1/.suitup"
+
+  [[ -s $_suitup_path ]] && source $_suitup_path
+}

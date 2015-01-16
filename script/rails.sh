@@ -1,4 +1,9 @@
 
+function suitup-rails-routes {
+  bundle exec rake routes > /tmp/rails.routes.log
+  suitup-open-some /tmp/rails.routes.log
+}
+
 function suitup-rails-assets-rebuild {
   bundle exec rake assets:clean RAILS_ENV=development
   bundle exec rake assets:precompile RAILS_ENV=development
