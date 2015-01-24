@@ -39,8 +39,7 @@ function suitup-git-commit-push {
 }
 
 function suitup-git-recovery {
-  local remote_branch=$(suitup-git-current-remote-branch)
-  git reset origin/$remote_branch
+  git reset $(suitup-git-current-remote-branch)
 }
 
 # suitup-git-recovery-commit 'update'
@@ -117,6 +116,10 @@ function suitup-git-diff-develop {
   suitup-git-diff develop
 }
 
+function suitup-git-diff-remote {
+  suitup-git-diff $(suitup-git-current-remote-branch)
+}
+
 function suitup-git-show {
   TARGET=$1
   if [ -z "$TARGET" ]; then
@@ -143,7 +146,8 @@ function suitup-git-current-branch {
 
 function suitup-git-current-remote-branch {
   local current_branch=$(suitup-git-current-branch)
-  git config branch.${current_branch}.merge | colrm 1 11
+  local remote_branch=`git config branch.${current_branch}.merge | colrm 1 11`
+  echo "origin/${remote_branch}"
 }
 
 # Work Flow
