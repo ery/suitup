@@ -8,6 +8,9 @@ Environment
 Install
 ------------------------
 
+    cd ~/Docuements
+    git clone https://github.com/ery/suitup.git
+    cd ~/Documents/suitup
     ./install.sh
 
 Command
