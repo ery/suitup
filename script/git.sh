@@ -42,7 +42,6 @@ function suitup-git-recovery {
   commit=$1
   if [ -z "$commit" ]; then
     commit=$(suitup-git-current-remote-branch)
-    return
   fi
 
   git reset $commit
