@@ -39,7 +39,13 @@ function suitup-git-commit-push {
 }
 
 function suitup-git-recovery {
-  git reset $(suitup-git-current-remote-branch)
+  commit=$1
+  if [ -z "$commit" ]; then
+    commit=$(suitup-git-current-remote-branch)
+    return
+  fi
+
+  git reset $commit
 }
 
 # suitup-git-recovery-commit 'update'
