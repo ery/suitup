@@ -1,4 +1,8 @@
 
+function suitup-redis-run {
+  redis-server /etc/redis.conf
+}
+
 function suitup-redis-clear {
   suitup-run 'redis-cli keys "*"'
   suitup-run 'redis-cli flushdb'
