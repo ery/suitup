@@ -79,21 +79,21 @@ function suitup-git-log {
 # Then input:
 # suitup-git-diff cdf987c1bdf2dfc1e910216804e78ac7ac3700f2
 function suitup-git-diff {
-  TARGET=$1
-  if [ -z "$TARGET" ]; then
+  local target=$1
+  if [ -z "$target" ]; then
     echo 'Must input a commit id'
     return
   fi
 
-  RESULT_FILE=/tmp/suitup-git-diff.COMMIT_EDITMSG
-  rm $RESULT_FILE 2> /dev/null
-  touch $RESULT_FILE
+  local output_file=/tmp/suitup.git.diff
+  rm $output_file 2> /dev/null
+  touch $output_file
 
-  echo '-----------------------------------------' >> $RESULT_FILE
-  echo ''                                          >> $RESULT_FILE
-  echo "suitup-git-diff"                           >> $RESULT_FILE
-  echo "Between HEAD and $TARGET"                  >> $RESULT_FILE
-  echo ''                                          >> $RESULT_FILE
+  echo '-----------------------------------------' >> $output_file
+  echo ''                                          >> $output_file
+  echo "suitup-git-diff"                           >> $output_file
+  echo "Between HEAD and $target"                  >> $output_file
+  echo ''                                          >> $output_file
 
   function run-command {
     echo '-----------------------------------------'
@@ -103,14 +103,14 @@ function suitup-git-diff {
     eval $1
   }
 
-  run-command "git log HEAD -n 1"                 >> $RESULT_FILE
-  run-command "git log $TARGET -n 1"              >> $RESULT_FILE
-  run-command "git diff $TARGET -C --name-status" >> $RESULT_FILE
-  run-command "git diff $TARGET -C "              >> $RESULT_FILE
+  run-command "git log HEAD -n 1"                 >> $output_file
+  run-command "git log $target -n 1"              >> $output_file
+  run-command "git diff $target -C --name-status" >> $output_file
+  run-command "git diff $target -C "              >> $output_file
 
-  echo "suitup-git-diff output: $RESULT_FILE"
+  echo "suitup-git-diff output: $output_file"
 
-  suitup-edit-some /tmp/suitup-git-diff.COMMIT_EDITMSG
+  suitup-edit-some $output_file
 }
 
 function suitup-git-diff-master {
@@ -126,20 +126,20 @@ function suitup-git-diff-remote {
 }
 
 function suitup-git-show {
-  TARGET=$1
-  if [ -z "$TARGET" ]; then
+  local target=$1
+  if [ -z "$target" ]; then
     echo 'Must input a commit id'
     return
   fi
 
-  CURRENT_TIME=$(date '+%Y%m%d%H%M%S')
-  RESULT_FILE="/tmp/suitup-git-show."$CURRENT_TIME"_"$TARGET".COMMIT_EDITMSG"
+  local current_time=$(date '+%Y%m%d%H%M%S')
+  local output_file="/tmp/suitup.git.show.${current_time}.${target}.git.diff"
 
-  rm -f $RESULT_FILE
+  rm -f $output_file
 
-  git show $TARGET >> $RESULT_FILE
+  git show $target >> $output_file
 
-  suitup-edit-some $RESULT_FILE
+  suitup-edit-some $output_file
 }
 
 # Other
