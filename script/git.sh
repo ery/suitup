@@ -103,12 +103,12 @@ function suitup-git-diff {
     eval $1
   }
 
-  run-command "git log HEAD -n 1"              >> $output_file
-  run-command "git log $target -n 1"           >> $output_file
-  run-command "git diff $target --detect-copies --shortstat"   >> $output_file
-  run-command "git diff $target --detect-copies --stat"        >> $output_file
-  run-command "git diff $target --detect-copies --name-status" >> $output_file
-  run-command "git diff $target --detect-copies"               >> $output_file
+  run-command "git log HEAD -n 1"                 >> $output_file
+  run-command "git log $target -n 1"              >> $output_file
+  run-command "git diff $target -C --shortstat"   >> $output_file
+  run-command "git diff $target -C --stat"        >> $output_file
+  run-command "git diff $target -C --name-status" >> $output_file
+  run-command "git diff $target -C"               >> $output_file
 
   echo "suitup-git-diff output: $output_file"
 
