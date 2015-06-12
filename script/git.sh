@@ -141,6 +141,8 @@ function suitup-git-show {
 
   git show $target >> $output_file
 
+  echo "suitup-git-show output: $output_file"
+
   suitup-edit-some $output_file
 }
 
