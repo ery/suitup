@@ -1,5 +1,5 @@
 
-function suitup-edit-some {
+function suitup-edit {
   ( sublime-text $1 & )
 }
 
@@ -8,5 +8,5 @@ function suitup-edit-hosts {
 }
 
 function suitup-edit-suitup {
-  suitup-edit-some $_suitup_path
+  suitup-edit $_suitup_path
 }

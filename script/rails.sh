@@ -1,7 +1,7 @@
 
 function suitup-rails-routes {
   bundle exec rake routes > /tmp/rails.routes.log
-  suitup-open-some /tmp/rails.routes.log
+  suitup-edit /tmp/rails.routes.log
 }
 
 function suitup-rails-assets-rebuild {

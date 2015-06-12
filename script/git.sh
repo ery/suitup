@@ -1,5 +1,5 @@
 
-# Comit Push
+# Commit Push
 ##############################################
 
 function suitup-git-push {
@@ -112,7 +112,7 @@ function suitup-git-diff {
 
   echo "suitup-git-diff output: $output_file"
 
-  suitup-edit-some $output_file
+  suitup-edit $output_file
 }
 
 function suitup-git-diff-master {
@@ -143,7 +143,7 @@ function suitup-git-show {
 
   echo "suitup-git-show output: $output_file"
 
-  suitup-edit-some $output_file
+  suitup-edit $output_file
 }
 
 # Other
