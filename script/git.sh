@@ -212,3 +212,24 @@ function suitup-git-release-branch {
   git checkout "$BRANCH_NAME";
   echo ""
 }
+
+function suitup-git-tag-release {
+  CURRENT_TIME=$(date '+%Y%m%d%H%M')
+  TAG_NAME="release_${CURRENT_TIME}" #release_201506121810
+
+  suitup-run "git tag ${TAG_NAME}"
+  suitup-run "git push origin --tags"
+}
+
+function suitup-git-tag-delete {
+  TAG_NAME=$1
+
+  if [ -z "$TAG_NAME" ]; then
+    echo 'Must input a tag name'
+    return
+  fi
+
+  suitup-run "git tag -d ${TAG_NAME}"
+  suitup-run "git push origin :refs/tags/${TAG_NAME}"
+}
+
