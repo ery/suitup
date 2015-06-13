@@ -13,21 +13,19 @@ function suitup-git-push-force {
 # suitup-git-commit 'update'
 # suitup-git-commit 'update' 'Jack <jack@gmail.com>'
 function suitup-git-commit {
-  local message=$1
-  local author=$2
+  local MESSAGE=$1
+  local AUTHOR=$2
 
-  if [ -n "$message" ]; then
-    message="$message"
-  else
-    message="No message."
+  if [ -z "$MESSAGE" ]; then
+    MESSAGE="No Message."
   fi
 
   git add .
 
-  if [ -n "$author" ]; then
-    git commit -am $message --author=$author
+  if [ -n "$AUTHOR" ]; then
+    git commit -am $MESSAGE --author=$AUTHOR
   else
-    git commit -am $message
+    git commit -am $MESSAGE
   fi
 }
 
@@ -39,12 +37,12 @@ function suitup-git-commit-push {
 }
 
 function suitup-git-recovery {
-  commit=$1
-  if [ -z "$commit" ]; then
-    commit=$(suitup-git-current-remote-branch)
+  COMMIT=$1
+  if [ -z "$COMMIT" ]; then
+    COMMIT=$(suitup-git-current-remote-branch)
   fi
 
-  git reset $commit
+  git reset $COMMIT
 }
 
 # suitup-git-recovery-commit 'update'
@@ -74,45 +72,37 @@ function suitup-git-log {
 }
 
 # If you want to konw?
-# What is differents between last and target commits?
-# If target commit id is cdf987c1bdf2dfc1e910216804e78ac7ac3700f2.
+# What is differents between last and TARGET commits?
+# If TARGET commit id is cdf987c1bdf2dfc1e910216804e78ac7ac3700f2.
 # Then input:
 # suitup-git-diff cdf987c1bdf2dfc1e910216804e78ac7ac3700f2
 function suitup-git-diff {
-  local target=$1
-  if [ -z "$target" ]; then
+  local TARGET=$1
+  if [ -z "$TARGET" ]; then
     echo 'Must input a commit id'
     return
   fi
 
-  local output_file=/tmp/suitup.git.diff
-  rm $output_file 2> /dev/null
-  touch $output_file
+  local OUTPUT_FILE=/tmp/suitup.git.diff
+  rm $OUTPUT_FILE 2> /dev/null
+  touch $OUTPUT_FILE
 
-  echo '-----------------------------------------' >> $output_file
-  echo ''                                          >> $output_file
-  echo "suitup-git-diff"                           >> $output_file
-  echo "Between HEAD and $target"                  >> $output_file
-  echo ''                                          >> $output_file
+  echo ''                                          >> $OUTPUT_FILE
+  echo "suitup-git-diff"                           >> $OUTPUT_FILE
+  echo "Between HEAD and $TARGET"                  >> $OUTPUT_FILE
+  echo '-----------------------------------------' >> $OUTPUT_FILE
+  echo ''                                          >> $OUTPUT_FILE
 
-  function run-command {
-    echo '-----------------------------------------'
-    echo ''
-    echo "$ $1"
-    echo ''
-    eval $1
-  }
+  suitup-run "git log HEAD -n 1"                 >> $OUTPUT_FILE
+  suitup-run "git log $TARGET -n 1"              >> $OUTPUT_FILE
+  suitup-run "git diff $TARGET -C --shortstat"   >> $OUTPUT_FILE
+  suitup-run "git diff $TARGET -C --stat"        >> $OUTPUT_FILE
+  suitup-run "git diff $TARGET -C --name-status" >> $OUTPUT_FILE
+  suitup-run "git diff $TARGET -C"               >> $OUTPUT_FILE
 
-  run-command "git log HEAD -n 1"                 >> $output_file
-  run-command "git log $target -n 1"              >> $output_file
-  run-command "git diff $target -C --shortstat"   >> $output_file
-  run-command "git diff $target -C --stat"        >> $output_file
-  run-command "git diff $target -C --name-status" >> $output_file
-  run-command "git diff $target -C"               >> $output_file
+  echo "suitup-git-diff output: $OUTPUT_FILE"
 
-  echo "suitup-git-diff output: $output_file"
-
-  suitup-edit $output_file
+  suitup-edit $OUTPUT_FILE
 }
 
 function suitup-git-diff-master {
@@ -128,22 +118,22 @@ function suitup-git-diff-remote {
 }
 
 function suitup-git-show {
-  local target=$1
-  if [ -z "$target" ]; then
+  local TARGET=$1
+  if [ -z "$TARGET" ]; then
     echo 'Must input a commit id'
     return
   fi
 
-  local current_time=$(date '+%Y%m%d%H%M%S')
-  local output_file="/tmp/suitup.git.show.${current_time}.${target}.git.diff"
+  local CURRENT_TIME=$(date '+%Y%m%d%H%M%S')
+  local OUTPUT_FILE="/tmp/suitup.git.show.${CURRENT_TIME}.${TARGET}.git.diff"
 
-  rm -f $output_file
+  rm -f $OUTPUT_FILE
 
-  git show $target >> $output_file
+  git show $TARGET >> $OUTPUT_FILE
 
-  echo "suitup-git-show output: $output_file"
+  echo "suitup-git-show output: $OUTPUT_FILE"
 
-  suitup-edit $output_file
+  suitup-edit $OUTPUT_FILE
 }
 
 # Other
