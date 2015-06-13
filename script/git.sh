@@ -171,12 +171,13 @@ function suitup-git-tag-delete {
 }
 
 
-# Work Flow
+# Branch
 ##############################################
 
+# Create branch on local and remote
 # suitup-git-create-branch new_customer
 # suitup-git-create-branch new_customer develop
-function suitup-git-create-branch {
+function suitup-git-branch-create {
   NEW_BRANCH=$1
   BASE_BRANCH=$2
 
@@ -194,4 +195,18 @@ function suitup-git-create-branch {
   suitup-run "git merge origin/${BASE_BRANCH}"
   suitup-run "git push origin HEAD:${NEW_BRANCH}"
   suitup-run "git checkout ${NEW_BRANCH}"
+}
+
+# Delete branch on local and remote
+# suitup-git-clean-branch new_customer
+function suitup-git-branch-clean {
+  BRANCH_NAME=$1
+
+  if [ -z "${BRANCH_NAME}" ]; then
+    echo 'Must input a branch name'
+    return
+  fi
+
+  suitup-run "git branch -D ${BRANCH_NAME}"
+  suitup-run "git push origin :${BRANCH_NAME}"
 }
