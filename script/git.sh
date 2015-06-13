@@ -84,21 +84,20 @@ function suitup-git-diff {
   fi
 
   local OUTPUT_FILE=/tmp/suitup.git.diff
-  rm $OUTPUT_FILE 2> /dev/null
+  rm -f $OUTPUT_FILE
   touch $OUTPUT_FILE
 
   echo ''                                          >> $OUTPUT_FILE
   echo "suitup-git-diff"                           >> $OUTPUT_FILE
   echo "Between HEAD and $TARGET"                  >> $OUTPUT_FILE
-  echo '-----------------------------------------' >> $OUTPUT_FILE
+  echo '=========================================' >> $OUTPUT_FILE
   echo ''                                          >> $OUTPUT_FILE
-
-  suitup-run "git log HEAD -n 1"                 >> $OUTPUT_FILE
-  suitup-run "git log $TARGET -n 1"              >> $OUTPUT_FILE
-  suitup-run "git diff $TARGET -C --shortstat"   >> $OUTPUT_FILE
-  suitup-run "git diff $TARGET -C --stat"        >> $OUTPUT_FILE
-  suitup-run "git diff $TARGET -C --name-status" >> $OUTPUT_FILE
-  suitup-run "git diff $TARGET -C"               >> $OUTPUT_FILE
+  suitup-run "git log HEAD -n 1"                   >> $OUTPUT_FILE
+  suitup-run "git log $TARGET -n 1"                >> $OUTPUT_FILE
+  suitup-run "git diff $TARGET -C --shortstat"     >> $OUTPUT_FILE
+  suitup-run "git diff $TARGET -C --stat"          >> $OUTPUT_FILE
+  suitup-run "git diff $TARGET -C --name-status"   >> $OUTPUT_FILE
+  suitup-run "git diff $TARGET -C"                 >> $OUTPUT_FILE
 
   echo "suitup-git-diff output: $OUTPUT_FILE"
 
