@@ -159,60 +159,8 @@ function suitup-git-current-remote-branch {
   echo "origin/${remote_branch}"
 }
 
-# Work Flow
+# Tag
 ##############################################
-
-# suitup-git-create-issue-branch 666_new_customer
-function suitup-git-create-issue-branch {
-  ISSUE_NAME=$1
-
-  if [ -n "$ISSUE_NAME" ]; then
-    echo "Creating new branch for issue $ISSUE_NAME"
-    echo '............................................'
-  else
-    echo 'Have to input issue name'
-    return
-  fi
-
-  git checkout master
-  git pull origin master
-  git push origin master:"$ISSUE_NAME"
-  git branch --track "$ISSUE_NAME" origin/"$ISSUE_NAME"
-  git checkout "$ISSUE_NAME"
-}
-
-# suitup-git-checkout-issue-branch 922_form_toolbar_mirror
-function suitup-git-checkout-issue-branch {
-  ISSUE_NAME=$1
-
-  if [ -n "$ISSUE_NAME" ]; then
-    echo "Checkout issue branch for $ISSUE_NAME"
-    echo '............................................'
-  else
-    echo 'Have to input issue name'
-    return
-  fi
-
-  git checkout -b $ISSUE_NAME origin/$ISSUE_NAME
-}
-
-function suitup-git-release-branch {
-  RELEASE_TIME=$(date "+%Y%m%d_%H%M");
-  BRANCH_NAME="release_$RELEASE_TIME";
-  echo "-----------------------------------------";
-  echo "Create Branch $BRANCH_NAME , base on current branch.";
-  git branch "$BRANCH_NAME";
-  echo "";
-  echo "-----------------------------------------";
-  echo "Push Branch $BRANCH_NAME to Origin.";
-  git push origin "$BRANCH_NAME":"$BRANCH_NAME";
-  echo "";
-  echo "Checkout Branch $BRANCH_NAME .";
-  echo "-----------------------------------------";
-  git checkout "$BRANCH_NAME";
-  echo ""
-}
-
 function suitup-git-tag-release {
   CURRENT_TIME=$(date '+%Y%m%d%H%M')
   TAG_NAME="release_${CURRENT_TIME}" #release_201506121810
@@ -233,3 +181,28 @@ function suitup-git-tag-delete {
   suitup-run "git push origin :refs/tags/${TAG_NAME}"
 }
 
+
+# Work Flow
+##############################################
+
+# suitup-git-create-branch new_customer
+# suitup-git-create-branch new_customer develop
+function suitup-git-create-branch {
+  NEW_BRANCH=$1
+  BASE_BRANCH=$2
+
+  if [ -z "${NEW_BRANCH}" ]; then
+    echo 'Must input a new branch name'
+    return
+  fi
+
+  if [ -z "${BASE_BRANCH}" ]; then
+    BASE_BRANCH="master"
+  fi
+
+  suitup-run "git checkout ${BASE_BRANCH}"
+  suitup-run "git fetch"
+  suitup-run "git merge origin/${BASE_BRANCH}"
+  suitup-run "git push origin HEAD:${NEW_BRANCH}"
+  suitup-run "git checkout ${NEW_BRANCH}"
+}
