@@ -73,9 +73,8 @@ function suitup-git-log {
 
 # If you want to konw?
 # What is differents between last and TARGET commits?
-# If TARGET commit id is cdf987c1bdf2dfc1e910216804e78ac7ac3700f2.
-# Then input:
-# suitup-git-diff cdf987c1bdf2dfc1e910216804e78ac7ac3700f2
+# If TARGET commit id is cdf987c1, juse input:
+# suitup-git-diff cdf987c1
 function suitup-git-diff {
   local TARGET=$1
   if [ -z "$TARGET" ]; then
@@ -135,7 +134,7 @@ function suitup-git-show {
   suitup-edit $OUTPUT_FILE
 }
 
-# Other
+# current-branch
 ##############################################
 
 function suitup-git-current-branch {
@@ -175,8 +174,8 @@ function suitup-git-tag-delete {
 ##############################################
 
 # Create branch on local and remote
-# suitup-git-create-branch new_customer
-# suitup-git-create-branch new_customer develop
+# suitup-git-branch-create new_customer
+# suitup-git-branch-create new_customer develop
 function suitup-git-branch-create {
   NEW_BRANCH=$1
   BASE_BRANCH=$2
@@ -198,8 +197,8 @@ function suitup-git-branch-create {
 }
 
 # Delete branch on local and remote
-# suitup-git-clean-branch new_customer
-function suitup-git-branch-clean {
+# suitup-git-branch-remove new_customer
+function suitup-git-branch-remove {
   BRANCH_NAME=$1
 
   if [ -z "${BRANCH_NAME}" ]; then
