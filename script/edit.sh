@@ -10,3 +10,7 @@ function suitup-edit-hosts {
 function suitup-edit-suitup {
   suitup-edit $_suitup_path
 }
+
+function sublime-text-mac {
+  open -a "Sublime Text" $1
+}
