@@ -8,8 +8,8 @@ function suitup-tags {
   rm -f $gem_path/tags
   rm -f $gem_path/.tags
 
-  ctags --languages="Ruby" -f $project_path/tags -R $project_path $gem_path
-  ctags --languages="Ruby" -f $gem_path/tags -R $gem_path
+  ctags-exuberant --languages="Ruby" -f $project_path/tags -R $project_path $gem_path
+  ctags-exuberant --languages="Ruby" -f $gem_path/tags -R $gem_path
 
   ln -s $project_path/tags $project_path/.tags
   ln -s $gem_path/tags $gem_path/.tags
