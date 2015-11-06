@@ -77,7 +77,7 @@ function suitup-git-log {
 # suitup-git-diff cdf987c1
 function suitup-git-diff {
   local TARGET=$1
-  if [ -z "$TARGET" ]; then
+  if [ -z "${TARGET}" ]; then
     echo 'Must input a commit id'
     return
   fi
@@ -88,15 +88,16 @@ function suitup-git-diff {
 
   echo ''                                          >> $OUTPUT_FILE
   echo "suitup-git-diff"                           >> $OUTPUT_FILE
-  echo "Between HEAD and $TARGET"                  >> $OUTPUT_FILE
+  echo "Diff between HEAD and ${TARGET}"           >> $OUTPUT_FILE
   echo '=========================================' >> $OUTPUT_FILE
   echo ''                                          >> $OUTPUT_FILE
-  suitup-run "git log HEAD -n 1"                   >> $OUTPUT_FILE
-  suitup-run "git log $TARGET -n 1"                >> $OUTPUT_FILE
-  suitup-run "git diff $TARGET -C --shortstat"     >> $OUTPUT_FILE
-  suitup-run "git diff $TARGET -C --stat"          >> $OUTPUT_FILE
-  suitup-run "git diff $TARGET -C --name-status"   >> $OUTPUT_FILE
-  suitup-run "git diff $TARGET -C"                 >> $OUTPUT_FILE
+
+  suitup-run "git show HEAD      --quiet"                     >> $OUTPUT_FILE
+  suitup-run "git show ${TARGET} --quiet"                     >> $OUTPUT_FILE
+  suitup-run "git diff ${TARGET} --find-copies --shortstat"   >> $OUTPUT_FILE
+  suitup-run "git diff ${TARGET} --find-copies --name-status" >> $OUTPUT_FILE
+  suitup-run "git diff ${TARGET} --find-copies --stat"        >> $OUTPUT_FILE
+  suitup-run "git diff ${TARGET} --find-copies"               >> $OUTPUT_FILE
 
   echo "suitup-git-diff output: $OUTPUT_FILE"
 
@@ -122,14 +123,25 @@ function suitup-git-show {
     return
   fi
 
-  local CURRENT_TIME=$(date '+%Y%m%d%H%M%S')
-  local OUTPUT_FILE="/tmp/suitup.git.show.${CURRENT_TIME}.${TARGET}.git.diff"
-
+  local CURRENT_TIME=$(date '+%Y%m%d%H%M')
+  local OUTPUT_FILE="/tmp/suitup.git.show.${CURRENT_TIME}.git.diff"
   rm -f $OUTPUT_FILE
+  touch $OUTPUT_FILE
 
-  git show $TARGET >> $OUTPUT_FILE
+  echo ''                                          >> $OUTPUT_FILE
+  echo "suitup-git-show ${TARGET}"                 >> $OUTPUT_FILE
+  echo '=========================================' >> $OUTPUT_FILE
+  echo ''                                          >> $OUTPUT_FILE
 
-  echo "suitup-git-show output: $OUTPUT_FILE"
+  suitup-run "git show ${TARGET} --find-copies --quiet"                 >> $OUTPUT_FILE
+  suitup-run "git show ${TARGET} --find-copies --oneline --shortstat"   >> $OUTPUT_FILE
+  suitup-run "git show ${TARGET} --find-copies --oneline --name-status" >> $OUTPUT_FILE
+  suitup-run "git show ${TARGET} --find-copies --oneline --stat"        >> $OUTPUT_FILE
+  suitup-run "git show ${TARGET} --find-copies --oneline"               >> $OUTPUT_FILE
+
+  # git show $TARGET >> $OUTPUT_FILE
+
+  echo "suitup-git-show: ${OUTPUT_FILE}"
 
   suitup-edit $OUTPUT_FILE
 }
