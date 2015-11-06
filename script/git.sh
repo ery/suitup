@@ -99,7 +99,7 @@ function suitup-git-diff {
   suitup-run "git diff ${TARGET} --find-copies --stat"        >> $OUTPUT_FILE
   suitup-run "git diff ${TARGET} --find-copies"               >> $OUTPUT_FILE
 
-  echo "suitup-git-diff output: $OUTPUT_FILE"
+  echo "Output: ${OUTPUT_FILE}"
 
   suitup-edit $OUTPUT_FILE
 }
@@ -139,9 +139,7 @@ function suitup-git-show {
   suitup-run "git show ${TARGET} --find-copies --oneline --stat"        >> $OUTPUT_FILE
   suitup-run "git show ${TARGET} --find-copies --oneline"               >> $OUTPUT_FILE
 
-  # git show $TARGET >> $OUTPUT_FILE
-
-  echo "suitup-git-show: ${OUTPUT_FILE}"
+  echo "Output: ${OUTPUT_FILE}"
 
   suitup-edit $OUTPUT_FILE
 }
