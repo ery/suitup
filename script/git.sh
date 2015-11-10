@@ -144,6 +144,18 @@ function suitup-git-show {
   suitup-edit $OUTPUT_FILE
 }
 
+function suitup-git-contrast {
+  local TARGET=$1
+  if [ -z "$TARGET" ]; then
+    echo 'Must input a commit id'
+    return
+  fi
+
+  local BASE_COMMIT=`git merge-base HEAD ${TARGET}`
+
+  suitup-git-diff ${BASE_COMMIT}
+}
+
 # current-branch
 ##############################################
 
