@@ -119,8 +119,7 @@ function suitup-git-diff-remote {
 function suitup-git-show {
   local TARGET=$1
   if [ -z "$TARGET" ]; then
-    echo 'Must input a commit id'
-    return
+    TARGET="HEAD"
   fi
 
   local CURRENT_TIME=$(date '+%Y%m%d%H%M')
