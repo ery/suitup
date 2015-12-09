@@ -132,11 +132,8 @@ function suitup-git-show {
   echo '=========================================' >> $OUTPUT_FILE
   echo ''                                          >> $OUTPUT_FILE
 
-  suitup-run "git show ${TARGET} --find-copies --quiet"                 >> $OUTPUT_FILE
-  suitup-run "git show ${TARGET} --find-copies --oneline --shortstat"   >> $OUTPUT_FILE
-  suitup-run "git show ${TARGET} --find-copies --oneline --name-status" >> $OUTPUT_FILE
-  suitup-run "git show ${TARGET} --find-copies --oneline --stat"        >> $OUTPUT_FILE
-  suitup-run "git show ${TARGET} --find-copies --oneline"               >> $OUTPUT_FILE
+  suitup-run "git show ${TARGET} --find-copies --stat"    >> $OUTPUT_FILE
+  suitup-run "git show ${TARGET} --find-copies --oneline" >> $OUTPUT_FILE
 
   echo "Output: ${OUTPUT_FILE}"
 
