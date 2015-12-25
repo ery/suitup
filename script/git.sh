@@ -92,12 +92,10 @@ function suitup-git-diff {
   echo '=========================================' >> $OUTPUT_FILE
   echo ''                                          >> $OUTPUT_FILE
 
-  suitup-run "git show HEAD      --quiet"                     >> $OUTPUT_FILE
-  suitup-run "git show ${TARGET} --quiet"                     >> $OUTPUT_FILE
-  suitup-run "git diff ${TARGET} --find-copies --shortstat"   >> $OUTPUT_FILE
-  suitup-run "git diff ${TARGET} --find-copies --name-status" >> $OUTPUT_FILE
-  suitup-run "git diff ${TARGET} --find-copies --stat"        >> $OUTPUT_FILE
-  suitup-run "git diff ${TARGET} --find-copies"               >> $OUTPUT_FILE
+  suitup-run "git show HEAD      --quiet"              >> $OUTPUT_FILE
+  suitup-run "git show ${TARGET} --quiet"              >> $OUTPUT_FILE
+  suitup-run "git diff ${TARGET} --find-copies --stat" >> $OUTPUT_FILE
+  suitup-run "git diff ${TARGET} --find-copies"        >> $OUTPUT_FILE
 
   echo "Output: ${OUTPUT_FILE}"
 
