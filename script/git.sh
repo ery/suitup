@@ -138,7 +138,7 @@ function suitup-git-show {
   suitup-edit $OUTPUT_FILE
 }
 
-function suitup-git-contrast {
+function suitup-git-compare {
   local TARGET=$1
   if [ -z "$TARGET" ]; then
     echo 'Must input a commit id'
