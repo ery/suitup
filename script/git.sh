@@ -45,6 +45,15 @@ function suitup-git-recovery {
   git reset $COMMIT
 }
 
+function suitup-git-recovery-hard {
+  COMMIT=$1
+  if [ -z "$COMMIT" ]; then
+    COMMIT=$(suitup-git-current-remote-branch)
+  fi
+
+  git reset $COMMIT --hard
+}
+
 # suitup-git-recovery-commit 'update'
 # suitup-git-recovery-commit 'update' 'Jack <jack@gmail.com>'
 function suitup-git-recovery-commit {
