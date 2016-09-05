@@ -72,7 +72,7 @@ function suitup-hostname {
   hostname
 }
 
-function suitup-upgrede {
+function suitup-upgrade {
   suitup-cd-suitup
   git pull
 }
