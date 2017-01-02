@@ -8,8 +8,8 @@ function suitup-kill {
 
 function suitup-kill-pid {
   pid=$1
-  echo "Kill $pid"
-  sudo kill $pid
+  echo "Kill -9 $pid"
+  sudo kill -9 $pid
 }
 
 function suitup-kill-nginx {
