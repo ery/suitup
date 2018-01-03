@@ -7,23 +7,7 @@ function suitup-load-script {
   source "$_suitup_path/script/cd.sh"
   source "$_suitup_path/script/edit.sh"
   source "$_suitup_path/script/git.sh"
-  source "$_suitup_path/script/tags.sh"
-  source "$_suitup_path/script/rails.sh"
-  source "$_suitup_path/script/rails-db.sh"
-  source "$_suitup_path/script/rails-test.sh"
-  source "$_suitup_path/script/ssh.sh"
   source "$_suitup_path/script/ps.sh"
-  source "$_suitup_path/script/solr.sh"
-  source "$_suitup_path/script/mysql.sh"
-  source "$_suitup_path/script/redis.sh"
   source "$_suitup_path/script/kill.sh"
-  source "$_suitup_path/script/zeus.sh"
   source "$_suitup_path/script/alias.sh"
-}
-
-# suitup_load /home/tom/Documents/github/
-function suitup-load {
-  local _suitup_path="$1/.suitup"
-
-  [[ -s $_suitup_path ]] && source $_suitup_path
 }
