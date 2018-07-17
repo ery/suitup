@@ -177,7 +177,7 @@ function suitup-git-current-remote-branch {
 function suitup-git-tag-release {
   local RELEASE_AT=$1
 
-  if [ -n "$RELEASE_AT" ]; then
+  if [ -z "$RELEASE_AT" ]; then
     RELEASE_AT=$(date '+%Y%m%d%H%M') #201506121810
   fi
 
