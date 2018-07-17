@@ -175,8 +175,13 @@ function suitup-git-current-remote-branch {
 # Tag
 ##############################################
 function suitup-git-tag-release {
-  CURRENT_TIME=$(date '+%Y%m%d%H%M')
-  TAG_NAME="release_${CURRENT_TIME}" #release_201506121810
+  local RELEASE_AT=$1
+
+  if [ -n "$RELEASE_AT" ]; then
+    RELEASE_AT=$(date '+%Y%m%d%H%M') #201506121810
+  fi
+
+  TAG_NAME="release_${RELEASE_AT}" #release_201506121810
 
   suitup-run "git tag ${TAG_NAME}"
   suitup-run "git push origin --tags"
